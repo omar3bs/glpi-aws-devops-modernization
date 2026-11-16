@@ -1,0 +1,35 @@
+﻿# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.tfplan
+.terraform.tfstate.lock.info
+crash.log
+crash.*.log
+
+# Docker and local data
+docker/data/
+backups/
+*.sql
+*.sql.gz
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
