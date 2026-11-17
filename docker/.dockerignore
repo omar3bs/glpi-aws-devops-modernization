@@ -1,0 +1,10 @@
+# Exclude everything by default
+**
+
+# Include required build files
+!Dockerfile
+!.dockerignore
+!apache/
+!apache/glpi.conf
+!php/
+!php/glpi.ini
