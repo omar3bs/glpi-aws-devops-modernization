@@ -33,3 +33,8 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Local Docker image exports
+/docker/glpi-share/
+/docker/glpi-share.zip
+*.tar

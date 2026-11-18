@@ -1,9 +1,12 @@
+# Pinned official PHP and Apache base image
 FROM php:8.5.12-apache-trixie@sha256:08af36df144462d84c7f16190557eec06cb9f656882685610b712a15eec54d46
 
+# Image metadata
 LABEL org.opencontainers.image.title="GLPI AWS Modernization"
 LABEL org.opencontainers.image.description="Unofficial GLPI container for automated cloud deployments"
 LABEL org.opencontainers.image.source="https://github.com/omar3bs/glpi-aws-devops-modernization"
 
+# Application version
 ARG GLPI_VERSION=12.0.2
 
 ENV TZ=UTC
@@ -71,7 +74,19 @@ RUN sed -i 's/Listen 80$/Listen 8080/' /etc/apache2/ports.conf \
         /var/lock/apache2 \
         /var/log/apache2
 
+# Install the custom startup script
+COPY scripts/entrypoint.sh /usr/local/bin/glpi-entrypoint.sh
+
+# Normalize Windows line endings and validate the startup script
+RUN sed -i 's/\r$//' /usr/local/bin/glpi-entrypoint.sh \
+    && chmod 755 /usr/local/bin/glpi-entrypoint.sh \
+    && sh -n /usr/local/bin/glpi-entrypoint.sh
+
 # Run as a non-privileged user
 USER www-data
 
+# Application port
 EXPOSE 8080
+
+# Execute automated GLPI initialization
+ENTRYPOINT ["/usr/local/bin/glpi-entrypoint.sh"]

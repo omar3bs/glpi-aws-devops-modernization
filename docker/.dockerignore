@@ -8,3 +8,5 @@
 !apache/glpi.conf
 !php/
 !php/glpi.ini
+!scripts/
+!scripts/entrypoint.sh
